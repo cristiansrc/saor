@@ -1,0 +1,30 @@
+#Regla para que siempre busque a zelo_ini.php sin importar la url exepto para los directorios css, js, images, img y resources
+RewriteEngine on
+RewriteCond $1 !^(zelo_ini.php|template|images)
+RewriteRule ^(.*)$ /developer/zelo_ini.php/$1 [L]
+
+#Restringe con el error 403 la navegacion a los directorios no protegidos
+#Options All -Indexes
+
+#Redirige al inicio de la pagina cuando intentan entrar a uno de los directorios no protegidos con el erro 403
+ErrorDocument 403 /developer/zelo_ini.php
+ErrorDocument 404 /developer/zelo_ini.php
+
+# asegurar htaccess
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
+
+#Codigo de carateres
+AddDefaultCharset utf-8
+
+#acelerar descarga del sitio
+#SetOutputFilter DEFLATE
+
+#AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/javascript text/css application/x-javascript
+#BrowserMatch ^Mozilla/4 gzip-only-text/html
+#BrowserMatch ^Mozilla/4.0[678] no-gzip
+ 
+#BrowserMatch bMSIE !no-gzip !gzip-only-text/html
+
